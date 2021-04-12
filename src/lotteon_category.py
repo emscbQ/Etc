@@ -1,4 +1,3 @@
-import openpyxl
 import requests
 
 
@@ -85,3 +84,5 @@ class LotteonCategory:
             self.categories.append(
                 [XL, L, M, S, category_id, ">".join(names), infos["is_leaf"]]
             )
+            print("카테고리 추출 중" + "." * (len(self.categories) % 3 + 1), end="\r")
+        print("카테고리 추출 완료!\n")

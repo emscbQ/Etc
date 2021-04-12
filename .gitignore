@@ -1,2 +1,4 @@
 # Project exclude paths
 /venv/
+/logs/
+/__pycache__/
