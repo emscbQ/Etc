@@ -54,9 +54,10 @@ if __name__ == '__main__':
             if not searched_words:
                 print("검색된 카테고리가 없습니다.\n")
                 continue
-            print(f'"{row[0]}"을 뭘로 변경하시겠습니까?\n')
+            print()
             for n, category_info in enumerate(searched_words):
                 print(f"{n + 1}. {category_info[5]}")
+            print(f'\n"{row[0]}"을 뭘로 변경하시겠습니까?\n')
             try:
                 selected_n = input("\n선택해주세요 (그만하려면 q, 보기 중에 없으면 x) >>> ")
                 if selected_n.lower() == "q":
