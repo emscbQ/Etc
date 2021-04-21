@@ -52,9 +52,12 @@ if __name__ == "__main__":
                     print(f"주문 번호로 조회된 출고 지연 등록 가능한 상품이 없습니다. ({order})")
                     log_list.append(f"{get_now()} 주문 번호로 조회된 출고 지연 등록 가능한 상품이 없습니다. ({order})")
                     continue
-                for warehouse_out_dict in rsp["result"]["warehouseOuts"]:
-                    log_list.append(f"{get_now()} {len(rsp['result']['warehouseOuts'])}개 조회 완료")
-                    warehouse_out = warehouse_out_dict["warehouseOut"]
+                if isinstance(rsp["result"]["warehouseOuts"][0]["warehouseOut"], dict):
+                    warehouse_out_list = [rsp["result"]["warehouseOuts"][0]["warehouseOut"]]
+                else:
+                    warehouse_out_list = rsp["result"]["warehouseOuts"][0]["warehouseOut"]
+                log_list.append(f"{get_now()} {len(warehouse_out_list)}개 조회 완료")
+                for warehouse_out in warehouse_out_list:
                     if warehouse_out.get("itemNm") in order_name_dict[order]:
                         # 출고지연처리
                         delay_body = dict(
