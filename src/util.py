@@ -1,26 +1,14 @@
-from datetime import datetime
-import json
-import openpyxl
 import os
-import pyexcel
-import pyexcel_xls
-import pyexcel_xlsx
-import pyexcel_io.writers
 import re
-
 from datetime import datetime
-
 from tkinter import filedialog, Tk
 
 import xlrd
-from openpyxl.utils.exceptions import InvalidFileException
-from openpyxl.utils.cell import column_index_from_string, get_column_letter
 
 
-def get_now():
+def get_now(str_format="%Y-%m-%d %H:%M:%S"):
     now = datetime.now()
-    return now.strftime("%Y-%m-%d %H:%M:%S")
-
+    return now.strftime(str_format)
 
 
 def open_selected_excel_to_list(sheet=0):
@@ -57,6 +45,8 @@ def open_selected_excel_to_list(sheet=0):
     return data
 
 
-
-def xls_to_xlsx(xls_path, xlsx_path):
-    pyexcel.save_book_as(file_name=xls_path, dest_file_name=xlsx_path)
+def is_jq_code(code: str) -> bool:
+    if re.findall(r"^J.*(V00)$", code) or re.findall(r"_v0{1,2}$", code) or re.findall(r"^JQ", code):
+        return True
+    else:
+        return False
